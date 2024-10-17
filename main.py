@@ -7,6 +7,11 @@ import tensorflow as tf
 from tensorflow.keras.applications.inception_v3 import InceptionV3, preprocess_input, decode_predictions
 from io import BytesIO
 
+import shutil
+
+# Move the uploaded image to the correct directory (only needed if you are using Replit or similar environments)
+shutil.move('/mnt/data/helloworld.jpg', './helloworld.jpg')
+
 # Configure the Google Generative AI key
 genai.configure(api_key=st.secrets["GeminiAI_API_Key"])
 
