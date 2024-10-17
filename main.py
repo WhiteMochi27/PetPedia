@@ -7,7 +7,7 @@ import base64
 import os
 from io import BytesIO
 
-genai.configure(api_key=os.environ["GeminiAI_API_Key"])
+genai.configure(api_key=st.secrets["GeminiAI_API_Key"])
 
 def decode_image(data):
     binary = base64.b64decode(data.split(',')[1])
