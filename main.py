@@ -72,6 +72,19 @@ def animal_identification(image):
     st.write(response.text)
 
 def main():
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background-image: url('helloworld.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("Identify your furry friend!")
 
     st.sidebar.title("Options")
@@ -103,16 +116,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-st.markdown("""
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-image: url('helloworld.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    <style>
-""")
