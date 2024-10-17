@@ -44,8 +44,10 @@ def animal_identification(image):
     model = genai.GenerativeModel(
         "gemini-1.5-flash",
         system_instruction="""
-        You are an animal expert that can provide detailed information about animal species.
-        The output must be in the format:
+        You are an animal expert that can provide detailed information about animal breed and            its species.
+        The output must be in the following format:
+        
+        Class Name: <class_name>
         Breed: <breed>
         Species: <species>
         Characteristics: <characteristics>
