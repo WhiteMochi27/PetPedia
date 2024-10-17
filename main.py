@@ -38,8 +38,7 @@ def classify_image(image):
 
 def animal_identification(image):
     # Classify the animal using InceptionV3
-    class_name, confidence = classify_image(image)
-    confidence_percentage = confidence * 100
+    class_name = classify_image(image)
 
     # Generate detailed description using Google Generative AI
     model = genai.GenerativeModel(
@@ -56,7 +55,9 @@ def animal_identification(image):
         Description: <description>
         """
     )
-    response = model.generate_content(["Identify the breed and the species of the given image.", image])
+
+    prompt = f"Give me details about the animal: {class_name}."
+    response = model.generate_content([prompt])
 
     st.image(image, caption="Uploaded Image")
     st.write(response.text)
