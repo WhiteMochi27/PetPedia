@@ -76,7 +76,7 @@ def main():
         """
         <style>
         .stApp {
-            background-image: url('helloworld.jpg');
+            background-image: url("https://www.freepik.com/premium-vector/cute-animals-cartoon-doodle-baby-animal-banner-background-wallpaper_26240365.htm");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
