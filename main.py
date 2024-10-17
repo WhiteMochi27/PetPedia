@@ -3,11 +3,15 @@ import cv2
 import numpy as np
 import PIL.Image
 import google.generativeai as genai
-import base64
-import os
+import tensorflow as tf
+from tensorflow.keras.applications.inception_v3 import InceptionV3, preprocess_input, decode_predictions
 from io import BytesIO
 
+# Configure the Google Generative AI key
 genai.configure(api_key=st.secrets["GeminiAI_API_Key"])
+
+# Load a pre-trained image classification model (InceptionV3)
+model = InceptionV3(weights='imagenet')
 
 def decode_image(data):
     binary = base64.b64decode(data.split(',')[1])
@@ -22,12 +26,27 @@ def take_photo():
         image = np.array(PIL.Image.open(img_file_buffer))
         return image
 
+def classify_image(image):
+    img_resized = cv2.resize(image, (299, 299))  # InceptionV3 expects 299x299 images
+    img_resized = np.expand_dims(img_resized, axis=0)
+    img_resized = preprocess_input(img_resized)
+
+    predictions = model.predict(img_resized)
+    decoded = decode_predictions(predictions, top=1)[0][0]  # Get top prediction
+
+    return decoded[1], decoded[2]  # Class name and confidence
+
 def animal_identification(image):
+    # Classify the animal using InceptionV3
+    class_name, confidence = classify_image(image)
+    confidence_percentage = confidence * 100
+
+    # Generate detailed description using Google Generative AI
     model = genai.GenerativeModel(
         "gemini-1.5-flash",
         system_instruction="""
-        You are an animal expert that is able to identify the breed and the species of the given image.
-        You are also able to give a brief description of the animal. The output must be in the below format:
+        You are an animal expert that can provide detailed information about animal species.
+        The output must be in the format:
         Breed: <breed>
         Species: <species>
         Characteristics: <characteristics>
@@ -37,9 +56,12 @@ def animal_identification(image):
         Description: <description>
         """
     )
-    response = model.generate_content(["Identify the breed and the species     of the given image.", image])
+
+    prompt = f"Give me details about the animal: {class_name}."
+    response = model.generate_content([prompt])
 
     st.image(image, caption="Uploaded Image")
+    st.write(f"Classification: {class_name} (Confidence: {confidence_percentage:.2f}%)")
     st.write(response.text)
 
 def main():
