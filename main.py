@@ -43,8 +43,8 @@ def animal_identification(image):
     # Generate detailed description using Google Generative AI
     model = genai.GenerativeModel(
         "gemini-1.5-flash",
-        system_instruction="""
-        You are an animal expert that can provide detailed information about animal breed and            its species.
+        system_instruction = """
+        You are an animal expert that can provide detailed information about animal breed and            its species. No point formating the output. List out all the information one by one and          space a single line in between each information.
         The output must be in the following format:
         
         Class Name: <class_name>
