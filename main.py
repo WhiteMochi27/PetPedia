@@ -72,23 +72,8 @@ def animal_identification(image):
     st.write(response.text)
 
 def main():
-
-    st.markdown("""
-        <style>
-            .stApp {
-            background-image: url("https://img.freepik.com/premium-vector/cute-animals-cartoon-doodle-baby-animal-banner-background-wallpaper_493693-121.jpg?w=740");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-            [data-testid="stSidebar"] {
-                background-color: #2d2d2d; 
-            }
-        
-        </style>
-    """, unsafe_allow_html=True)
     
-    # st.image("https://img.freepik.com/premium-vector/cute-animals-cartoon-doodle-baby-animal-banner-background-wallpaper_493693-121.jpg?w=740")
+    st.image("https://img.freepik.com/premium-vector/cute-animals-cartoon-doodle-baby-animal-banner-background-wallpaper_493693-121.jpg?w=740")
     st.title("Identify your furry friend!")
 
     st.sidebar.title("Options")
