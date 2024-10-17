@@ -56,9 +56,7 @@ def animal_identification(image):
         Description: <description>
         """
     )
-
-    prompt = f"Give me details about the animal: {class_name}."
-    response = model.generate_content([prompt])
+    response = model.generate_content(["Identify the breed and the species of the given image.", image])
 
     st.image(image, caption="Uploaded Image")
     st.write(response.text)
