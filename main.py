@@ -61,7 +61,6 @@ def animal_identification(image):
     response = model.generate_content([prompt])
 
     st.image(image, caption="Uploaded Image")
-    st.write(f"Classification: {class_name} (Confidence: {confidence_percentage:.2f}%)")
     st.write(response.text)
 
 def main():
