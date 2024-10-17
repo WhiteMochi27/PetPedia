@@ -3,3 +3,4 @@ google-generativeai
 opencv-python-headless
 numpy
 pillow
+tensorflow==2.12.0
