@@ -21,7 +21,6 @@ def take_photo():
     if img_file_buffer is not None:
         image = np.array(PIL.Image.open(img_file_buffer))
         return image
-    return None
 
 def animal_identification(image):
     model = genai.GenerativeModel(
@@ -38,7 +37,7 @@ def animal_identification(image):
         Description: <description>
         """
     )
-    response = model.generate_content(["Identify the breed and the species of the given         image.", image])
+    response = model.generate_content(["Identify the breed and the species     of the given image.", image])
 
     st.image(image, caption="Uploaded Image")
     st.write(response.text)
