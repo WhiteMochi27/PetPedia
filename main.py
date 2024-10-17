@@ -45,7 +45,7 @@ def animal_identification(image):
         "gemini-1.5-flash",
         system_instruction="""
         You are an animal expert that can provide detailed information about animal breed and            its species.
-        The output must be in the following format:
+        The output must be in the following format with a new line after each information:
         
         Class Name: <class_name>
         Breed: <breed>
