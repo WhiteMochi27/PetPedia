@@ -43,7 +43,7 @@ def animal_identification(image):
     st.write(response.text)
 
 def main():
-    st.title("Animal Identification System")
+    st.title("Identify your furry friend!")
 
     st.sidebar.title("Options")
     user_choice = st.sidebar.selectbox("Choose an option", ["Take Photo", "Upload Photo", "Exit"])
@@ -52,24 +52,24 @@ def main():
         photo = take_photo()
         if photo is not None:
             st.image(photo, caption="Captured Image")
-            
+
             if st.button("Analyze Photo"):
                 animal_identification(photo)
             elif st.button("Retake Photo"):
                 st.experimental_rerun()
-                
+
     elif user_choice == "Upload Photo":
         uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
-        
+
         if uploaded_file is not None:
             image = np.array(PIL.Image.open(uploaded_file))
             st.image(image, caption="Uploaded Image")
-            
+
             if st.button("Analyze Uploaded Photo"):
                 animal_identification(image)
-                
+
     elif user_choice == "Exit":
-        st.write("Exiting...")
+        st.write("Proceeding to main menu...")
 
 if __name__ == "__main__":
     main()
